@@ -5,7 +5,7 @@ import 'package:currency_converter/features/currency_converter/domain/repositori
 
 class CurrencyConverterRepositoryImplementation
     implements CurrencyConverterRepository {
-  final CurrencyRemoteDataSourceImplementation dataSourceImplementation;
+  final CurrencyRemoteDataSource dataSourceImplementation;
   const CurrencyConverterRepositoryImplementation(
       {required this.dataSourceImplementation});
   @override
