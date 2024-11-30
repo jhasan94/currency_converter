@@ -3,7 +3,6 @@ import 'package:currency_converter/core/error_handling/exceptions.dart';
 import 'package:currency_converter/core/error_handling/failureEntity.dart';
 
 class ExceptionUtils {
-
   static Exception getExceptionFromStatusCode(int statusCode) {
     if (statusCode == AppStatusCode.unAuthorized) {
       return UnAuthorizedException();
