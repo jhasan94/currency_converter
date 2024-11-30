@@ -10,5 +10,6 @@ class FailureEntity with _$FailureEntity {
   const factory FailureEntity.clientFailure() = ClientFailure;
   const factory FailureEntity.unknownFailure() = UnknownFailure;
   const factory FailureEntity.unAuthorizedFailure() = UnAuthorizedFailure;
-  const factory FailureEntity.badRequestFailure(String message) = BadRequestFailure;
+  const factory FailureEntity.badRequestFailure(String message) =
+      BadRequestFailure;
 }

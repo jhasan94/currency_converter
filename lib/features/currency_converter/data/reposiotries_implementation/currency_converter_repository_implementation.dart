@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:currency_converter/core/utils/typedef.dart';
 import 'package:currency_converter/features/currency_converter/domain/entities/currency.dart';
 import 'package:currency_converter/features/currency_converter/data/mappers/currency_mapper.dart';
-import 'package:currency_converter/features/currency_converter/data/data_source/currency_local_data_source.dart';
-import 'package:currency_converter/features/currency_converter/data/data_source/currency_remote_data_source.dart';
+import 'package:currency_converter/features/currency_converter/data/data_source/local/currency_local_data_source.dart';
+import 'package:currency_converter/features/currency_converter/data/data_source/remote/currency_remote_data_source.dart';
 import 'package:currency_converter/features/currency_converter/domain/repositories/currency_converter_repository.dart';
 
 class CurrencyConverterRepositoryImplementation

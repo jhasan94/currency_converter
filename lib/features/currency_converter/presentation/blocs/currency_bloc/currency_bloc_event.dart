@@ -13,4 +13,3 @@ class ConvertCurrencyEvent extends CurrencyEvent {
     required this.toCurrency,
   });
 }
-
