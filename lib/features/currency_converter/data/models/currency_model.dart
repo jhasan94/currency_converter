@@ -18,6 +18,7 @@ class CurrencyModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "conversion_rates": Map.from(data).map((k, v) => MapEntry<String, dynamic>(k, v)),
+        "conversion_rates":
+            Map.from(data).map((k, v) => MapEntry<String, dynamic>(k, v)),
       };
 }

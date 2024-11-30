@@ -3,7 +3,7 @@ import 'package:mocktail/mocktail.dart';
 import 'CurrencyConverterRepository.mock.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:currency_converter/features/currency_converter/domain/entities/currency.dart';
-import 'package:currency_converter/features/currency_converter/domain/repositories/currency_converter_reposiotry.dart';
+import 'package:currency_converter/features/currency_converter/domain/repositories/currency_converter_repository.dart';
 import 'package:currency_converter/features/currency_converter/domain/use_cases/get_currency_list.dart';
 
 void main() {
