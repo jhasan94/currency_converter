@@ -1,5 +1,8 @@
 # Currency Converter App
 
+![Currency Converter Screenshot](screen_shots/home.png "Currency Converter App")
+![Currency Converter Screenshot](screen_shots/currency_converter_page.png "Currency Converter App")
+
 # Project Overview
     This is a Currency Converter app built using Flutter, designed to fetch, cache, and display 
     currency exchange rates.The app uses a clean architecture design and integrates local caching 
