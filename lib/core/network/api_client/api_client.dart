@@ -24,7 +24,7 @@ class ApiClient {
     required String endPoint,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? body,
-    required T Function(Map<String,dynamic>) fromJson,
+    required T Function(Map<String, dynamic>) fromJson,
     required RequestType method,
   }) async {
     try {
@@ -45,7 +45,7 @@ class ApiClient {
   }
 
   Future<T> _handleResponse<T>(
-      http.Response response, T Function(Map<String,dynamic>) fromJson) async {
+      http.Response response, T Function(Map<String, dynamic>) fromJson) async {
     if (response.statusCode == AppStatusCode.success) {
       try {
         return fromJson(jsonDecode(response.body));

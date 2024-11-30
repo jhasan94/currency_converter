@@ -13,11 +13,12 @@ class CurrencyModel {
   String toRawJson() => json.encode(toJson());
 
   factory CurrencyModel.fromJson(Map<String, dynamic> json) => CurrencyModel(
-        data: Map.from(json["data"])
+        data: Map.from(json["conversion_rates"])
             .map((k, v) => MapEntry<String, double>(k, v?.toDouble())),
       );
 
   Map<String, dynamic> toJson() => {
-        "data": Map.from(data).map((k, v) => MapEntry<String, dynamic>(k, v)),
+        "conversion_rates":
+            Map.from(data).map((k, v) => MapEntry<String, dynamic>(k, v)),
       };
 }
