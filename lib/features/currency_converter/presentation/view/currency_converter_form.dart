@@ -65,6 +65,7 @@ class CurrencyConverterFormState extends State<CurrencyConverterForm> {
             padding: const EdgeInsets.all(8),
             child: ElevatedButton(
               onPressed: () {
+                FocusScope.of(context).requestFocus(FocusNode());
                 if (fromCurrency != null &&
                     toCurrency != null &&
                     amount != null) {
@@ -87,8 +88,8 @@ class CurrencyConverterFormState extends State<CurrencyConverterForm> {
                 'Convert',
                 style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white),
               ),
             ),
           ),

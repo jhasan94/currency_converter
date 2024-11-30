@@ -1,6 +1,6 @@
+import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
 
 class DatabaseManager {
   static const String _dbName = 'currency_converter.db';
@@ -27,7 +27,8 @@ class DatabaseManager {
           CREATE TABLE currencies (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             code TEXT NOT NULL,
-            rate REAL NOT NULL
+            rate REAL NOT NULL,
+            timestamp INTEGER NOT NULL
           )
         ''');
       },

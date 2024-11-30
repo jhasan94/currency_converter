@@ -1,8 +1,9 @@
 import 'package:get_it/get_it.dart';
+import 'package:currency_converter/core/local_database/cache_manager.dart';
 import 'package:currency_converter/core/local_database/database_manager.dart';
 import 'package:currency_converter/core/network/api_client/api_client.dart';
-import 'package:currency_converter/features/currency_converter/data/data_source/currency_local_data_source.dart';
-import 'package:currency_converter/features/currency_converter/data/data_source/currency_remote_data_source.dart';
+import 'package:currency_converter/features/currency_converter/data/data_source/local/currency_local_data_source.dart';
+import 'package:currency_converter/features/currency_converter/data/data_source/remote/currency_remote_data_source.dart';
 import 'package:currency_converter/features/currency_converter/domain/repositories/currency_converter_repository.dart';
 import 'package:currency_converter/features/currency_converter/domain/use_cases/convert_currency.dart';
 import 'package:currency_converter/features/currency_converter/domain/use_cases/get_currency_list.dart';
@@ -18,6 +19,7 @@ class ServiceLocator {
     // Core Services
     sl.registerSingleton(ApiClient());
     sl.registerSingleton(DatabaseManager());
+    sl.registerSingleton(CacheManager());
 
     // Data Sources
 
@@ -30,7 +32,8 @@ class ServiceLocator {
     //local
     sl.registerFactory<CurrencyLocalDataSource>(
       () => CurrencyLocalDataSourceImplementation(
-          databaseManager: sl.get<DatabaseManager>()),
+          databaseManager: sl.get<DatabaseManager>(),
+          cacheManager: sl.get<CacheManager>()),
     );
 
     // Repositories
