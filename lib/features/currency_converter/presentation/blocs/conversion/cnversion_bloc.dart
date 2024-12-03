@@ -11,8 +11,8 @@ class ConversionBloc extends Bloc<ConversionEvent, ConversionState> {
       emit(ConversionLoading());
       final result = await convertCurrency(
         ConvertCurrencyParams(
-            fromRate: event.fromCurrency,
-            toRate: event.toCurrency,
+            fromCurrency: event.fromCurrency,
+            toCurrency: event.toCurrency,
             amount: event.amount),
       );
       result.fold(

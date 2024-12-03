@@ -21,7 +21,8 @@ void main() {
 
     final result = await useCases();
 
-    expect(result, equals(const Right<dynamic, List<Currency>>(tCurrencyList)));
+    expect(result,
+        equals(const Right<dynamic, List<Currency>>(tCurrencyList)));
     verify(() => repository.getCurrencyList()).called(1);
     verifyNoMoreInteractions(repository);
   });

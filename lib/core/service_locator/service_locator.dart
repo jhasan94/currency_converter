@@ -49,7 +49,7 @@ class ServiceLocator {
     );
 
     sl.registerFactory<ConvertCurrency>(
-      () => const ConvertCurrency(),
+      () => ConvertCurrency(sl.get<CurrencyConverterRepository>()),
     );
 
     // Registering CurrencyBloc

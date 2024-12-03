@@ -19,7 +19,7 @@ class CurrencyErrorState extends CurrencyState {
 }
 
 class CurrencyConvertedState extends CurrencyState {
-  final double convertedAmount;
+  final String convertedAmount;
 
   CurrencyConvertedState({required this.convertedAmount});
 }

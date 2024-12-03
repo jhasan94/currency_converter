@@ -6,8 +6,8 @@ abstract class ConversionEvent extends Equatable {
 }
 
 class ConvertCurrencyEvent extends ConversionEvent {
-  final double fromCurrency;
-  final double toCurrency;
+  final String fromCurrency;
+  final String toCurrency;
   final double amount;
 
   ConvertCurrencyEvent({

@@ -24,7 +24,7 @@ class ApiClient {
     required String endPoint,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? body,
-    required T Function(Map<String, dynamic>) fromJson,
+    required T Function(String jsonData) fromRawJson,
     required RequestType method,
   }) async {
     try {
@@ -37,7 +37,7 @@ class ApiClient {
       } else {
         throw Exception("Unsupported Request Type");
       }
-      return Right(await _handleResponse(response, fromJson));
+      return Right(await _handleResponse(response, fromRawJson));
     } catch (e) {
       return left(Failure.mapFailureToErrorObject(
           failure: ExceptionUtils.convertExceptionToFailure(e)));
@@ -45,10 +45,10 @@ class ApiClient {
   }
 
   Future<T> _handleResponse<T>(
-      http.Response response, T Function(Map<String, dynamic>) fromJson) async {
+      http.Response response, T Function(String) fromRawJson) async {
     if (response.statusCode == AppStatusCode.success) {
       try {
-        return fromJson(jsonDecode(response.body));
+        return fromRawJson(response.body);
       } catch (e) {
         throw DataParsingException();
       }

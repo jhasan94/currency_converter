@@ -17,8 +17,8 @@ class CurrencyConverterForm extends StatefulWidget {
 }
 
 class CurrencyConverterFormState extends State<CurrencyConverterForm> {
-  double? fromCurrency;
-  double? toCurrency;
+  String? fromCurrency;
+  String? toCurrency;
   double? amount;
 
   @override
@@ -36,7 +36,7 @@ class CurrencyConverterFormState extends State<CurrencyConverterForm> {
         CurrencyDropdown(
           currencies: widget.currencies,
           onChanged: (value) =>
-              setState(() => fromCurrency = value?.currencyRate),
+              setState(() => fromCurrency = value?.currencyId),
         ),
         const Padding(
           padding: EdgeInsets.all(8),
@@ -47,8 +47,7 @@ class CurrencyConverterFormState extends State<CurrencyConverterForm> {
         ),
         CurrencyDropdown(
           currencies: widget.currencies,
-          onChanged: (value) =>
-              setState(() => toCurrency = value?.currencyRate),
+          onChanged: (value) => setState(() => toCurrency = value?.currencyId),
         ),
         const Padding(
           padding: EdgeInsets.all(8),
@@ -97,16 +96,16 @@ class CurrencyConverterFormState extends State<CurrencyConverterForm> {
         BlocBuilder<ConversionBloc, ConversionState>(
           builder: (context, state) {
             if (state is ConversionLoading) {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             } else if (state is ConversionSuccess) {
               return Center(
                   child: Text(
-                'Converted Amount: ${state.convertedAmount.toStringAsFixed(2)}',
+                'Converted Amount: ${state.convertedAmount}',
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ));
             } else if (state is ConversionError) {
-              return Text('Error: ${state.message}');
+              return Center(child: Text('Error: ${state.message}'));
             } else {
               return const SizedBox();
             }
