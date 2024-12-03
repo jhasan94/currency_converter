@@ -1,8 +1,8 @@
 # Currency Converter App
 
 <div style="display: flex; justify-content: center;">
-  <img src="screen_shots/converter_page.png" alt="Currency Converter Screenshot" title="Currency Converter App" width="400" height="800" style="margin-right: 20px;"/>
   <img src="screen_shots/home.png" alt="Currency Converter Screenshot" title="Currency Converter App" width="400" height="800"/>
+  <img src="screen_shots/converter_page.png" alt="Currency Converter Screenshot" title="Currency Converter App" width="400" height="800" style="margin-right: 20px;"/>
 </div>
 
 
