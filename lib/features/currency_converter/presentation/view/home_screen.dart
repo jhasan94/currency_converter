@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:currency_converter/features/currency_converter/presentation/widgets/app_bar.dart';
 import 'package:currency_converter/features/currency_converter/presentation/widgets/custom_option_card.dart';
-import 'package:currency_converter/features/currency_converter/presentation/view/historical_data_screen.dart';
 import 'package:currency_converter/features/currency_converter/presentation/view/currency_converter_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE8F5E9), // Light greenish background
+      backgroundColor: const Color(0xFFE8F5E9),
       appBar: customAppBar(title: 'Currency Converter'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -47,19 +46,19 @@ class HomeScreen extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 20),
-            CustomOptionCard(
-              title: 'Historical Data',
-              icon: Icons.bar_chart,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HistoricalDataScreen(),
-                  ),
-                );
-              },
-            ),
+            // const SizedBox(height: 20),
+            // CustomOptionCard(
+            //   title: 'Historical Data',
+            //   icon: Icons.bar_chart,
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => const HistoricalDataScreen(),
+            //       ),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

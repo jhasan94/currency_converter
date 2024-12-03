@@ -1,3 +1,6 @@
+import 'package:currency_converter/features/currency_converter/domain/use_cases/get_historical_data.dart';
+import 'package:currency_converter/features/currency_converter/presentation/blocs/historical_data/historical_data_bloc.dart';
+
 import 'currency_converter_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,15 +17,22 @@ class CurrencyConverterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<CurrencyBloc>()..add(LoadCurrencyListEvent()),
-      child: BlocProvider<ConversionBloc>(
-        create: (context) => ConversionBloc(sl.get<ConvertCurrency>()),
-        child: Scaffold(
-          backgroundColor: const Color(0xFFE8F5E9),
-          appBar: customAppBar(title: 'Currency Converter'),
-          body: const CurrencyConverterWidget(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CurrencyBloc>(
+          create: (context) => sl<CurrencyBloc>()..add(LoadCurrencyListEvent()),
         ),
+        BlocProvider<ConversionBloc>(
+          create: (context) => ConversionBloc(sl.get<ConvertCurrency>()),
+        ),
+        BlocProvider<HistoricalDataBloc>(
+          create: (context) => HistoricalDataBloc(sl.get<GetHistoricalData>()),
+        ),
+      ],
+      child: Scaffold(
+        backgroundColor: const Color(0xFFE8F5E9),
+        appBar: customAppBar(title: 'Currency Converter'),
+        body: const CurrencyConverterWidget(),
       ),
     );
   }
