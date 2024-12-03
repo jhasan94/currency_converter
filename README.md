@@ -1,7 +1,11 @@
 # Currency Converter App
 
-<img src="screen_shots/home.png" alt="Currency Converter Screenshot" title="Currency Converter App" width="400" height="800"/>
-<img src="screen_shots/currency_converter_page.png" alt="Currency Converter Screenshot" title="Currency Converter App" width="400" height="800"/>
+<div style="display: flex; justify-content: center;">
+  <img src="screen_shots/converter_page.png" alt="Currency Converter Screenshot" title="Currency Converter App" width="400" height="800" style="margin-right: 20px;"/>
+  <img src="screen_shots/home.png" alt="Currency Converter Screenshot" title="Currency Converter App" width="400" height="800"/>
+</div>
+
+
 
 # Project Overview
     This is a Currency Converter app built using Flutter, designed to fetch, cache, and display 
