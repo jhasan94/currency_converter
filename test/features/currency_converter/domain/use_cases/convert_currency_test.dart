@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:mocktail/mocktail.dart';
 import 'CurrencyConverterRepository.mock.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:currency_converter/core/app_constant/api_end_points.dart';
+import 'package:currency_converter/core/app_secret.dart';
 import 'package:currency_converter/features/currency_converter/domain/use_cases/convert_currency.dart';
 import 'package:currency_converter/features/currency_converter/domain/entities/currency_coversion_enitty.dart';
 
@@ -27,7 +27,7 @@ void main() {
     final queryParams = {
       "q": "USD_BDT",
       "compact": "ultra",
-      "apiKey": ApiEndPoints.apiKey,
+      "apiKey": AppSecret.apiKey,
     };
 
     final mockResult = CurrencyConversionEntity(conversions: {

@@ -1,9 +1,9 @@
-import 'package:currency_converter/core/app_constant/api_end_points.dart';
-import 'package:currency_converter/features/currency_converter/domain/repositories/currency_converter_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:currency_converter/core/app_secret.dart';
 import 'package:currency_converter/core/utils/typedef.dart';
 import 'package:currency_converter/core/use_case/use_case.dart';
 import 'package:currency_converter/core/error_handling/failure.dart';
+import 'package:currency_converter/features/currency_converter/domain/repositories/currency_converter_repository.dart';
 
 class ConvertCurrency extends UseCaseWithParams<String, ConvertCurrencyParams> {
   const ConvertCurrency(this._repository);
@@ -15,7 +15,7 @@ class ConvertCurrency extends UseCaseWithParams<String, ConvertCurrencyParams> {
     var queryParams = {
       "q": code,
       "compact": "ultra",
-      "apiKey": ApiEndPoints.apiKey
+      "apiKey": AppSecret.apiKey
     };
     var response = await _repository.getCurrencyConvertResult(queryParams);
     return response.fold((failure) {
