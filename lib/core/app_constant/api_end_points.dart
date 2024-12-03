@@ -6,4 +6,5 @@ class ApiEndPoints {
   static String baseUrl = 'https://free.currconv.com';
   static String apiKey = '790ab2007cdf7c3989e5';
   static String currencies = "/api/v8/countries?apiKey=$apiKey";
+  static String currencyConversion = "/api/v8/convert";
 }

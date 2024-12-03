@@ -35,8 +35,8 @@ class CurrencyBloc extends Bloc<CurrencyEvent, CurrencyState> {
     emit(CurrencyLoadingState());
     final result = await convertCurrency(
       ConvertCurrencyParams(
-          fromRate: double.tryParse(event.fromCurrency) ?? 0,
-          toRate: double.tryParse(event.fromCurrency) ?? 0,
+          fromCurrency: event.fromCurrency,
+          toCurrency: event.toCurrency,
           amount: event.amount),
     );
     result.fold(

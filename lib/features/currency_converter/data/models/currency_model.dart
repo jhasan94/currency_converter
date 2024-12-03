@@ -8,6 +8,7 @@ class CurrencyModel extends Currency {
     required super.currencyId,
     required super.currencyName,
     required super.currencySymbol,
+    required super.countryFlag,
   });
 
   static List<CurrencyModel> fromRawJson(String str) {
@@ -15,18 +16,19 @@ class CurrencyModel extends Currency {
     final results = decoded['results'] as Map<String, dynamic>;
 
     return results.entries.map((entry) {
-      return CurrencyModel.fromJson(entry.value); // entry.value contains the currency data
+      return CurrencyModel.fromJson(
+          entry.value); // entry.value contains the currency data
     }).toList();
   }
 
   factory CurrencyModel.fromJson(Map<String, dynamic> json) {
     return CurrencyModel(
-      id: json['id'],
-      name: json['name'],
-      currencyId: json['currencyId'],
-      currencyName: json['currencyName'],
-      currencySymbol: json['currencySymbol'] ?? '', // Default to empty string if null
-    );
+        id: json['id'],
+        countryName: json['name'],
+        currencyId: json['currencyId'],
+        currencyName: json['currencyName'],
+        currencySymbol: json['currencySymbol'] ?? '',
+        countryFlag: 'https://flagcdn.com/16x12/${json['id'].toLowerCase()}.png');
   }
 
   Map<String, dynamic> toJson() {

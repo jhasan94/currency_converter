@@ -6,6 +6,7 @@ class Currency extends Equatable {
   final String currencyId;
   final String currencyName;
   final String currencySymbol;
+  final String countryFlag;
   //final String alpha3;
 
   const Currency({
@@ -14,6 +15,7 @@ class Currency extends Equatable {
     required this.currencyId,
     required this.currencyName,
     required this.currencySymbol,
+    required this.countryFlag,
     //required this.alpha3,
   });
 

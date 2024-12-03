@@ -1,3 +1,4 @@
+import 'package:currency_converter/features/currency_converter/domain/entities/currency_coversion_enitty.dart';
 import 'package:dartz/dartz.dart';
 import 'package:currency_converter/core/utils/typedef.dart';
 import 'package:currency_converter/features/currency_converter/domain/entities/currency.dart';
@@ -38,6 +39,15 @@ class CurrencyConverterRepositoryImplementation
         } catch (_) {}
         return Right(currencyModel);
       },
+    );
+  }
+
+  @override
+  FutureResult<CurrencyConversionEntity> getCurrencyConvertResult(Map<String,dynamic> params) async {
+    final remoteData = await currencyRemoteDataSource.getConversionResult(params);
+    return remoteData.fold(
+      (failure) => Left(failure),
+      (currencyModel) => Right(currencyModel.toEntity()),
     );
   }
 }

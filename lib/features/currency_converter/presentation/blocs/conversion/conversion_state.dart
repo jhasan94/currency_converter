@@ -10,7 +10,7 @@ class ConversionInitial extends ConversionState {}
 class ConversionLoading extends ConversionState {}
 
 class ConversionSuccess extends ConversionState {
-  final double convertedAmount;
+  final String convertedAmount;
 
   ConversionSuccess({required this.convertedAmount});
 

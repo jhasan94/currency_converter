@@ -29,13 +29,15 @@ class CurrencyDropdownState extends State<CurrencyDropdown> {
             child: Row(
               children: [
                 CachedNetworkImage(
-                  imageUrl: currency.currencyFlag,
+                  imageUrl: currency.countryFlag,
                   errorWidget: (context, url, error) => const SizedBox(),
                 ),
                 const SizedBox(
                   width: 16,
                 ),
-                Text(currency.currencyCode),
+                Text(
+                  "${currency.currencyId} (${currency.countryName})",
+                ),
               ],
             ),
           );

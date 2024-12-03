@@ -1,94 +1,53 @@
-import 'package:currency_converter/core/error_handling/failure.dart';
-import 'package:currency_converter/features/currency_converter/domain/use_cases/convert_currency.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
-class MockConvertCurrency extends Mock implements ConvertCurrency {}
+import 'CurrencyConverterRepository.mock.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:currency_converter/core/app_constant/api_end_points.dart';
+import 'package:currency_converter/features/currency_converter/domain/use_cases/convert_currency.dart';
+import 'package:currency_converter/features/currency_converter/domain/entities/currency_coversion_enitty.dart';
 
 void main() {
-  late ConvertCurrency convertCurrency;
+  late MockCurrencyConverterRepository mockRepository;
+  late ConvertCurrency useCase;
 
   setUp(() {
-    convertCurrency = const ConvertCurrency();
+    mockRepository = MockCurrencyConverterRepository();
+    useCase = ConvertCurrency(mockRepository);
   });
 
-  group('ConvertCurrency Use Case', () {
-    const double validFromRate = 0.85;
-    const double validToRate = 1.10;
-    const double validAmount = 100.0;
+  test('Should call getCurrencyConvertResult with correct query parameters',
+      () async {
+    // Arrange
+    var params = ConvertCurrencyParams(
+      fromCurrency: 'USD',
+      toCurrency: 'BDT',
+      amount: 100.0,
+    );
+    const expectedRate = 120.0;
+    final queryParams = {
+      "q": "USD_BDT",
+      "compact": "ultra",
+      "apiKey": ApiEndPoints.apiKey,
+    };
 
-    test('should return converted amount when parameters are valid', () async {
-      // Arrange
-      const expectedConvertedAmount = (validAmount / validFromRate) * validToRate;
-      final params = ConvertCurrencyParams(
-        fromRate: validFromRate,
-        toRate: validToRate,
-        amount: validAmount,
-      );
-
-      // Act
-      final result = await convertCurrency(params);
-
-      // Assert
-      expect(result, equals(const Right(expectedConvertedAmount)));
+    final mockResult = CurrencyConversionEntity(conversions: {
+      'USD_BDT': expectedRate,
     });
 
-    test('should return failure if fromRate is invalid (<= 0)', () async {
-      // Arrange
-      const invalidFromRate = 0.0;
-      final params = ConvertCurrencyParams(
-        fromRate: invalidFromRate,
-        toRate: validToRate,
-        amount: validAmount,
-      );
+    when(() => mockRepository.getCurrencyConvertResult(queryParams))
+        .thenAnswer((_) async => Right(mockResult));
 
-      // Act
-      final result = await convertCurrency(params);
+    // Act
+    final result = await useCase(params);
 
-      // Assert
-      expect(result, equals(const Left(Failure(
-        title: 'error',
-        message: 'Invalid currency rates.',
-      ))));
-    });
-
-    test('should return failure if toRate is invalid (<= 0)', () async {
-      // Arrange
-      const invalidToRate = 0.0;
-      final params = ConvertCurrencyParams(
-        fromRate: validFromRate,
-        toRate: invalidToRate,
-        amount: validAmount,
-      );
-
-      // Act
-      final result = await convertCurrency(params);
-
-      // Assert
-      expect(result, equals(const Left(Failure(
-        title: 'error',
-        message: 'Invalid currency rates.',
-      ))));
-    });
-
-    test('should return failure if amount is invalid (<= 0)', () async {
-      // Arrange
-      const invalidAmount = 0.0;
-      final params = ConvertCurrencyParams(
-        fromRate: validFromRate,
-        toRate: validToRate,
-        amount: invalidAmount,
-      );
-
-      // Act
-      final result = await convertCurrency(params);
-
-      // Assert
-      expect(result, equals(const Left(Failure(
-        title: 'error',
-        message: 'Amount must be greater than zero.',
-      ))));
-    });
+    // Assert
+    verify(() => mockRepository.getCurrencyConvertResult(queryParams))
+        .called(1);
+    result.fold(
+      (failure) => fail('Test failed with error: ${failure.message}'),
+      (convertedAmount) {
+        expect(convertedAmount, equals('12000.00 BDT'));
+      },
+    );
   });
 }
