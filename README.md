@@ -53,10 +53,10 @@ Contains business logic and interacts with repositories.
 Includes UI components (widgets) and state management.
 
 ## Benefits of using clean architecture
-Testability: Each layer is independent, making the app easier to test.
-Scalability: Well-organized architecture ensures the app can grow without becoming complex.
-Separation of Concerns: Clear boundaries between UI, business logic, and data handling.
-Reusability: Business logic and data sources can be reused across different parts of the app or 
+- Testability: Each layer is independent, making the app easier to test.
+- Scalability: Well-organized architecture ensures the app can grow without becoming complex.
+  Separation of Concerns: Clear boundaries between UI, business logic, and data handling.
+- Reusability: Business logic and data sources can be reused across different parts of the app or 
 in other apps.
 
 ## Additional Architectural Patterns
@@ -67,16 +67,16 @@ By using a service locator (e.g., GetIt), dependencies like DatabaseManager,
 CurrencyLocalDataSource, and CurrencyRemoteDataSource are injected where needed.
 
 ## Advantages of DI:
-Improved Testability: Dependencies can easily be mocked during testing.
-Centralized Configuration: Dependency management is centralized, simplifying maintenance.
+- Improved Testability: Dependencies can easily be mocked during testing.
+- Centralized Configuration: Dependency management is centralized, simplifying maintenance.
 
 ## Singleton Design Pattern
 Some components, such as DatabaseManager, follow the Singleton Design Pattern to 
 ensure only a single instance exists throughout the app lifecycle.
 
 ## Advantages of singleton:
-Resource Efficiency: Prevents multiple instances of the database connection from being created.
-Global Access: Ensures a shared state across the app without redundant instantiations.
+- Resource Efficiency: Prevents multiple instances of the database connection from being created.
+- Global Access: Ensures a shared state across the app without redundant instantiations.
 
 # Centralized API Client and Error Handling
 The app includes a centralized API client to manage all network interactions and error handling, 
@@ -94,13 +94,13 @@ Example: The Failure class captures errors with a title and message, making it e
 display user-friendly error messages in the UI.
 
 # Benefits of Centralization 
-Consistency: Centralized handling ensures that all API calls and errors are managed in the same 
+- Consistency: Centralized handling ensures that all API calls and errors are managed in the same 
 way,reducing potential bugs and discrepancies.
-Reusability: Common configurations and error-handling logic are reused across the app, 
+- Reusability: Common configurations and error-handling logic are reused across the app, 
 reducing boilerplate code.
-Improved Debugging: By centralizing error reporting, it becomes easier to identify and 
+- Improved Debugging: By centralizing error reporting, it becomes easier to identify and 
 address issues in the app.
-Scalability: As the app grows, centralized management simplifies the addition of 
+- Scalability: As the app grows, centralized management simplifies the addition of 
 new endpoints or error cases.
 
 # cached_network_image
@@ -109,12 +109,12 @@ This app uses the cached_network_image library to load and display currency flag
 This library caches images locally to avoid repeated downloads.
 
 ## Benefits of using cached_network_image
-Efficient Caching: Automatically stores downloaded images locally to save bandwidth and 
+- Efficient Caching: Automatically stores downloaded images locally to save bandwidth and 
 improve loading times.
-Placeholder Support: Displays placeholders while images are being downloaded.
-Performance: Reduces the load on remote servers and enhances the app's performance 
+- Placeholder Support: Displays placeholders while images are being downloaded.
+- Performance: Reduces the load on remote servers and enhances the app's performance 
 for end-users.
-Fallback Mechanism: Provides fallback images in case of a network error, 
+- Fallback Mechanism: Provides fallback images in case of a network error, 
 improving the user experience.
 
 # sqflite
@@ -124,20 +124,20 @@ for caching exchange rates.
 Timestamps are stored to check the cache validity.
 
 ## Benefits of using sqflite
-Lightweight and Fast: SQLite is a lightweight embedded database that works well 
-on mobile devices.
-Structured Data: Ideal for storing structured data (e.g., currency codes, rates, and timestamps).
-Local Persistence: Enables offline access by caching data locally.
-Reliability: Proven stability and support in Flutter projects.
+- Lightweight and Fast: SQLite is a lightweight embedded database that works well 
+- on mobile devices.
+- Structured Data: Ideal for storing structured data (e.g., currency codes, rates, and timestamps).
+- Local Persistence: Enables offline access by caching data locally.
+- Reliability: Proven stability and support in Flutter projects.
 
 
 # Future Improvements
 ## Reusable Widgets
 To create modular and reusable UI components to reduce redundancy and improve maintainability.
 Examples of Planned Widgets:
-Custom Button: A reusable button widget with consistent styling across the app.
-Currency Tile: A widget to display currency flags, codes, and exchange rates in a unified format.
-Error Display: A widget to show user-friendly error messages consistently throughout the app.
-Common Styles and Themes
+- Custom Button: A reusable button widget with consistent styling across the app.
+- Currency Tile: A widget to display currency flags, codes, and exchange rates in a unified format.
+- Error Display: A widget to show user-friendly error messages consistently throughout the app.
+- Common Styles and Themes
 To centralize the app’s visual design using a common theme and style system for better 
 consistency and maintainability.
