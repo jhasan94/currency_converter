@@ -31,6 +31,16 @@
 
 # Adapted Design Pattern for the App Architecture
 
+## SOLID Principal
+
+Additionally, the project integrates the SOLID principles, which consist of the following:
+
+- Single Responsibility Principle (SRP): Ensures that each class has a single responsibility, enhancing code clarity and maintainability.
+- Open/Closed Principle (OCP): Allows for extending the functionality without modifying existing code, promoting code reuse and scalability.
+- Liskov Substitution Principle (LSP): Ensures that derived classes can be substituted for their base classes without affecting the correctness of the program.
+- Interface Segregation Principle (ISP): Encourages the creation of focused interfaces to prevent clients from depending on unnecessary functionalities.
+- Dependency Inversion Principle (DIP): Promotes loose coupling by depending on abstractions, facilitating flexibility and testability.
+  By adhering to the SOLID principles, the project achieves code that is modular, reusable, and easier to understand and maintain.
 ## Clean Architecture
     The app is built using the Clean Architecture pattern, which ensures separation of concerns by 
     dividing the app into the following layers:
