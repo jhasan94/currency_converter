@@ -7,8 +7,8 @@ import 'package:currency_converter/core/local_database/database_manager.dart';
 import 'package:currency_converter/features/currency_converter/data/models/currency_model.dart';
 
 abstract class CurrencyLocalDataSource {
-  FutureResult<CurrencyModel> getCurrencyList();
-  Future<void> saveCurrencies(CurrencyModel currencies);
+  FutureResult<List<CurrencyModel>> getCurrencyList();
+  Future<void> saveCurrencies(List<CurrencyModel> currencies);
 }
 
 class CurrencyLocalDataSourceImplementation implements CurrencyLocalDataSource {
@@ -23,7 +23,7 @@ class CurrencyLocalDataSourceImplementation implements CurrencyLocalDataSource {
   });
 
   @override
-  FutureResult<CurrencyModel> getCurrencyList() async {
+  FutureResult<List<CurrencyModel>> getCurrencyList() async {
     try {
       final db = await databaseManager.database;
       final result = await db.query(_tableName);
@@ -41,14 +41,17 @@ class CurrencyLocalDataSourceImplementation implements CurrencyLocalDataSource {
         return const Left(Failure(
           title: "Cache Expired",
           message:
-              "The cached data is older than the allowed duration, fetch new data from the server.",
+              "The cached data is older than the allowed duration. Fetch new data from the server.",
         ));
       }
 
-      final data = {
-        for (var row in result) row['code'] as String: row['rate'] as double,
-      };
-      return Right(CurrencyModel(data: data));
+      final currencies = result.map((row) {
+        final jsonData = Map<String, dynamic>.from(row);
+        jsonData.remove('timestamp'); // Remove extra fields if needed
+        return CurrencyModel.fromJson(jsonData);
+      }).toList();
+
+      return Right(currencies);
     } catch (e) {
       return Left(Failure(
           title: "Error",
@@ -57,26 +60,22 @@ class CurrencyLocalDataSourceImplementation implements CurrencyLocalDataSource {
   }
 
   @override
-  Future<void> saveCurrencies(CurrencyModel currency) async {
+  Future<void> saveCurrencies(List<CurrencyModel> currencies) async {
     try {
       final db = await databaseManager.database;
       final currentTimestamp = DateTime.now().millisecondsSinceEpoch;
 
       await db.delete(_tableName);
-
       final batch = db.batch();
-      currency.data.forEach((code, rate) {
+      for (var currency in currencies) {
+        final currencyData = currency.toJson();
+        currencyData['timestamp'] = currentTimestamp;
         batch.insert(
           _tableName,
-          {
-            "code": code,
-            "rate": rate,
-            "timestamp": currentTimestamp,
-          },
-          conflictAlgorithm: ConflictAlgorithm.replace, // Replace existing data
+          currencyData,
+          conflictAlgorithm: ConflictAlgorithm.replace,
         );
-      });
-
+      }
       await batch.commit(noResult: true);
     } catch (e) {
       throw Failure(

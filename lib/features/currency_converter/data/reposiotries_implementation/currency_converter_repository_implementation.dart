@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:currency_converter/core/utils/typedef.dart';
 import 'package:currency_converter/features/currency_converter/domain/entities/currency.dart';
-import 'package:currency_converter/features/currency_converter/data/mappers/currency_mapper.dart';
 import 'package:currency_converter/features/currency_converter/data/data_source/local/currency_local_data_source.dart';
 import 'package:currency_converter/features/currency_converter/data/data_source/remote/currency_remote_data_source.dart';
 import 'package:currency_converter/features/currency_converter/domain/repositories/currency_converter_repository.dart';
@@ -20,12 +19,13 @@ class CurrencyConverterRepositoryImplementation
   FutureResult<List<Currency>> getCurrencyList() async {
     final localData = await currencyLocalDataSource.getCurrencyList();
 
-    final result = localData.fold<List<Currency>>(
+    final cachedCurrencies = localData.fold<List<Currency>>(
       (failure) => [],
-      (success) => CurrencyMapper.toEntity(success),
+      (currencyModel) => currencyModel,
     );
-    if (result.isNotEmpty) {
-      return Right(result);
+
+    if (cachedCurrencies.isNotEmpty) {
+      return Right(cachedCurrencies);
     }
 
     final remoteData = await currencyRemoteDataSource.getCurrencyList();
@@ -33,8 +33,10 @@ class CurrencyConverterRepositoryImplementation
     return remoteData.fold(
       (failure) => Left(failure),
       (currencyModel) async {
-        await currencyLocalDataSource.saveCurrencies(currencyModel);
-        return right(CurrencyMapper.toEntity(currencyModel));
+        try {
+          await currencyLocalDataSource.saveCurrencies(currencyModel);
+        } catch (_) {}
+        return Right(currencyModel);
       },
     );
   }

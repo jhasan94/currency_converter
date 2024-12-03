@@ -1,24 +1,41 @@
 import 'dart:convert';
+import 'package:currency_converter/features/currency_converter/domain/entities/currency.dart';
 
-class CurrencyModel {
-  final Map<String, double> data;
-
-  CurrencyModel({
-    required this.data,
+class CurrencyModel extends Currency {
+  const CurrencyModel({
+    required super.id,
+    required super.countryName,
+    required super.currencyId,
+    required super.currencyName,
+    required super.currencySymbol,
   });
 
-  factory CurrencyModel.fromRawJson(String str) =>
-      CurrencyModel.fromJson(json.decode(str));
+  static List<CurrencyModel> fromRawJson(String str) {
+    final decoded = json.decode(str) as Map<String, dynamic>;
+    final results = decoded['results'] as Map<String, dynamic>;
 
-  String toRawJson() => json.encode(toJson());
+    return results.entries.map((entry) {
+      return CurrencyModel.fromJson(entry.value); // entry.value contains the currency data
+    }).toList();
+  }
 
-  factory CurrencyModel.fromJson(Map<String, dynamic> json) => CurrencyModel(
-        data: Map.from(json["conversion_rates"])
-            .map((k, v) => MapEntry<String, double>(k, v?.toDouble())),
-      );
+  factory CurrencyModel.fromJson(Map<String, dynamic> json) {
+    return CurrencyModel(
+      id: json['id'],
+      name: json['name'],
+      currencyId: json['currencyId'],
+      currencyName: json['currencyName'],
+      currencySymbol: json['currencySymbol'] ?? '', // Default to empty string if null
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        "conversion_rates":
-            Map.from(data).map((k, v) => MapEntry<String, dynamic>(k, v)),
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': countryName,
+      'currencyId': currencyId,
+      'currencyName': currencyName,
+      'currencySymbol': currencySymbol,
+    };
+  }
 }

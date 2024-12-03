@@ -4,7 +4,7 @@ import 'package:currency_converter/core/network/api_client/api_client.dart';
 import 'package:currency_converter/features/currency_converter/data/models/currency_model.dart';
 
 abstract class CurrencyRemoteDataSource {
-  FutureResult<CurrencyModel> getCurrencyList();
+  FutureResult<List<CurrencyModel>> getCurrencyList();
 }
 
 class CurrencyRemoteDataSourceImplementation
@@ -14,11 +14,11 @@ class CurrencyRemoteDataSourceImplementation
   CurrencyRemoteDataSourceImplementation({required this.apiClient});
 
   @override
-  FutureResult<CurrencyModel> getCurrencyList() async {
-    final response = await apiClient.handleRequest<CurrencyModel>(
-      endPoint: ApiEndPoints.currency,
+  FutureResult<List<CurrencyModel>> getCurrencyList() async {
+    final response = await apiClient.handleRequest<List<CurrencyModel>>(
+      endPoint: ApiEndPoints.currencies,
       queryParams: null,
-      fromJson: CurrencyModel.fromJson,
+      fromRawJson: CurrencyModel.fromRawJson,
       method: RequestType.get,
     );
     return response;

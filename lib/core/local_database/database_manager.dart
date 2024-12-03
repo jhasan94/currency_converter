@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 class DatabaseManager {
   static const String _dbName = 'currency_converter.db';
   static const int _dbVersion = 1;
+  static const String _tableName = 'currencies';
 
   Database? _database;
 
@@ -22,12 +23,14 @@ class DatabaseManager {
     _database = await openDatabase(
       path,
       version: _dbVersion,
-      onCreate: (db, version) {
-        db.execute('''
-          CREATE TABLE currencies (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            code TEXT NOT NULL,
-            rate REAL NOT NULL,
+      onCreate: (db, version) async {
+        await db.execute('''
+          CREATE TABLE $_tableName (
+            id TEXT PRIMARY KEY,
+            name TEXT,
+            currencyId TEXT,
+            currencyName TEXT,
+            currencySymbol TEXT,
             timestamp INTEGER NOT NULL
           )
         ''');

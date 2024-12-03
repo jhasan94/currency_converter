@@ -7,5 +7,6 @@ class GetCurrencyList extends UseCaseWithoutParams<List<Currency>> {
   const GetCurrencyList(this._repository);
   final CurrencyConverterRepository _repository;
   @override
-  FutureResult<List<Currency>> call() async => _repository.getCurrencyList();
+  FutureResult<List<Currency>> call() async =>
+      _repository.getCurrencyList();
 }
