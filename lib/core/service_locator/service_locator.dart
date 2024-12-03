@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:currency_converter/features/currency_converter/domain/use_cases/get_historical_data.dart';
+import 'package:currency_converter/features/currency_converter/presentation/blocs/historical_data/historical_data_bloc.dart';
 import 'package:currency_converter/core/local_database/cache_manager.dart';
 import 'package:currency_converter/core/local_database/database_manager.dart';
 import 'package:currency_converter/core/network/api_client/api_client.dart';
@@ -52,12 +54,17 @@ class ServiceLocator {
       () => ConvertCurrency(sl.get<CurrencyConverterRepository>()),
     );
 
-    // Registering CurrencyBloc
+    sl.registerFactory<GetHistoricalData>(
+      () => GetHistoricalData(sl.get<CurrencyConverterRepository>()),
+    );
+
+    // Bloc
     sl.registerFactory<CurrencyBloc>(
-      () => CurrencyBloc(
-        getCurrencyList: sl.get<GetCurrencyList>(),
-        convertCurrency: sl.get<ConvertCurrency>(),
-      ),
+      () => CurrencyBloc(getCurrencyList: sl.get<GetCurrencyList>(),),
+    );
+
+    sl.registerFactory<HistoricalDataBloc>(
+      () => HistoricalDataBloc(sl.get<GetHistoricalData>()),
     );
   }
 }

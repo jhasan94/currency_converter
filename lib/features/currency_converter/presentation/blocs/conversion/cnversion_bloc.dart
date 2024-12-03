@@ -17,8 +17,7 @@ class ConversionBloc extends Bloc<ConversionEvent, ConversionState> {
       );
       result.fold(
         (failure) => emit(ConversionError(message: failure.message)),
-        (convertedAmount) =>
-            emit(ConversionSuccess(convertedAmount: convertedAmount)),
+        (convertedAmount) => emit(ConversionSuccess(convertedAmount: convertedAmount)),
       );
     });
   }
