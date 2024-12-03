@@ -16,18 +16,18 @@ and explanations of the design patterns, libraries, and databases used.
 ## How to Build the Project
 
 ## Steps to Build
-Clone the repository:
-git clone <repository-url>
-Navigate to the project directory:
-cd currency_converter
-Get all dependencies:
-flutter pub get
-Run the project:
-flutter run
-Ensure you have an emulator running or a physical device connected.
-To build an APK:
-flutter build apk --release
-The APK will be available in the /build/app/outputs/flutter-apk/ directory.
+- Clone the repository:
+- git clone <repository-url>
+- Navigate to the project directory:
+- cd currency_converter
+- Get all dependencies:
+- flutter pub get
+- Run the project:
+- flutter run
+- Ensure you have an emulator running or a physical device connected.
+- To build an APK:
+- flutter build apk --release
+- The APK will be available in the /build/app/outputs/flutter-apk/ directory.
 
 # Adapted Design Pattern for the App Architecture
 
